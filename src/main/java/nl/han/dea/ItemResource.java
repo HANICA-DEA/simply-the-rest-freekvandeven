@@ -12,7 +12,14 @@ public class ItemResource {
     @GET
     @Path("/")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response items() {
+    public Response getItemsPlain() {
         return Response.ok("bread, butter").build();
+    }
+
+    @GET
+    @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getItemsJson() {
+        return Response.ok("[\"bread\", \"butter\"]").build();
     }
 }
