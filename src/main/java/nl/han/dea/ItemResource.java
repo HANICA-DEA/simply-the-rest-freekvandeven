@@ -1,21 +1,21 @@
 package nl.han.dea;
 
 import nl.han.dea.services.ItemService;
+import nl.han.dea.services.dto.ItemDTO;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/items")
 public class ItemResource {
 
-    private ItemService itemService;
+    private static ItemService itemService;
 
     public ItemResource() {
-        this.itemService = new ItemService();
+        if(itemService == null) {
+            itemService = new ItemService();
+        }
     }
 
     @GET
@@ -41,5 +41,13 @@ public class ItemResource {
         return Response.status(Response.Status.OK)
                 .entity(itemService.getItem(itemID))
                 .build();
+    }
+
+    @POST
+    @Path("/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response postItem(ItemDTO item){
+        itemService.addItem(item);
+        return Response.status(Response.Status.CREATED).build();
     }
 }
