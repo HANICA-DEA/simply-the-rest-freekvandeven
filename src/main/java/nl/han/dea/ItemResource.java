@@ -50,4 +50,14 @@ public class ItemResource {
         itemService.addItem(item);
         return Response.status(Response.Status.CREATED).build();
     }
+
+    @DELETE
+    @Path("/{itemID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteItem(@PathParam("itemID") Integer itemID) {
+        itemService.deleteItem(itemID);
+        return Response.status(Response.Status.OK)
+                .entity(itemService.getAll())
+                .build();
+    }
 }
