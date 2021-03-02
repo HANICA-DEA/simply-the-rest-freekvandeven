@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 @Path("/items")
 public class ItemResource {
 
-    private static ItemService itemService;
+    static ItemService itemService;
 
     public ItemResource() {
         if(itemService == null) {
